@@ -8,8 +8,12 @@
 	$pass = "";
 	$db = "users";
 
-	$con = mysqli_connect($host, $user, $pass, $db); 
+	$con = new mysqli($host, $user, $pass,  $db);
 
+    if($con -> connect_error)
+	{
+		die("Connection Failed: " .$con->connect_error);
+	} 
 
 	if(isset($_POST['login_btn']))
 	{
@@ -20,6 +24,14 @@
 		
 		$sql = "SELECT * FROM users WHERE username ='$username' AND password='$password'";
 		$result = mysqli_query($con, $sql);
+
+        $stmt = $con->prepare("INSERT INTO users(id, username, email, password) VALUES (?, ?, ?, ?)");
+        $stmt->bind_param("isss", $id, $username, $email, $password);
+				
+
+		$stmt->execute();
+		$stmt->close();
+		$con->close();
 	
 		if(mysqli_num_rows($result) == 1)
 		{
