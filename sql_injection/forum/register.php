@@ -22,7 +22,7 @@
 		{
 			$password = md5($password);
 			
-			$sql = "INSERT INTO users(username, email, password) VALUES('$username', '$email', '$password')";
+			$sql = "INSERT INTO $db(username, email, password) VALUES('$username', '$email', '$password')";
 			mysqli_query($con, $sql);
 
 			$_SESSION['message'] = "Hi $username. You are now logged in.";

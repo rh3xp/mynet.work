@@ -36,11 +36,11 @@
 ?>
 
 <br>
-<a href = "login.html">Login</a>
+<a href = "login.php">Login</a>
 <br>
-<a href = "register.html">Register</a>
+<a href = "register.php">Register</a>
 <br>
-<a href = "logout.php">logout</a>
+<a href = "logout.php">Logout</a>
 
 </body>
 </html>

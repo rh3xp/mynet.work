@@ -18,11 +18,27 @@
 	}
 
 ?>
-<a href = "login.php">Login</a>
+
+<?php
+    if(isset($_SESSION['username']))
+    {
+        $uname = $_SESSION['username'];
+        echo "<br>";
+        echo "<h1>Hi $uname</h1>";
+        echo "You are now logged in.";
+
+    }
+
+    else
+    {
+        echo "You are not logged in. Please do.";
+    }
+?>
+
 <br>
-<a href = "register.php">Register</a>
+<a href = "login.html">Login</a>
 <br>
-<a href = "logout.php">Logout</a>
+<a href = "register.html">Register</a>
 
 </body>
 </html>

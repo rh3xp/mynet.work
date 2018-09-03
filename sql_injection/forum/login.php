@@ -18,7 +18,7 @@
 
 		$password = md5($password);
 		
-		$sql = "SELECT * FROM users WHERE username ='$username' AND password='$password'";
+		$sql = "SELECT * FROM $db WHERE username ='$username' AND password='$password'";
 		$result = mysqli_query($con, $sql);
 	
 		if(mysqli_num_rows($result) == 1)

@@ -14,7 +14,7 @@
 	  	echo "<hr>";
 		echo $_SESSION['message'];
 		echo "<hr>";
-		unset($_SESSION['message']);
+		//unset($_SESSION['message']);
 	}
 
 ?>
@@ -28,19 +28,11 @@
         echo "You are now logged in.";
 
     }
-
-    else
-    {
-        echo "You are not logged in. Please do.";
-    }
 ?>
 
 <br>
-<a href = "login.html">Login</a>
-<br>
-<a href = "register.html">Register</a>
-<br>
-<a href = "logout.php">logout</a>
-
+<a href = "php/logout.php">Logout</a>
+<h3>Wanna join the forum chat?</h3>
+<a href="forum/forum.html"><h4>Click here to join.</h4></a>
 </body>
 </html>
