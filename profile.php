@@ -1,10 +1,23 @@
 <?php
-    session_start();
-    if(isset($_SESSION['username']))
-    {
-        $uname = $_SESSION['username'];
-        echo "<br>";
-        echo "<h1>Hi $uname</h1>";
-        echo "You are now logged in.";
-    }
+	session_start();
+	if(isset($_SESSION['username']))
+	{
+		$uname = $_SESSION['username'];
+	
+	echo '<a href="includes/logout.php">
+			<input class="logoutbutton" type="button" value="Logout">
+		</a>';
+	}
 ?>
+
+<!DOCTYPE <!DOCTYPE html>
+<html>
+<head>
+    <title>Profile</title>
+</head>
+<body>
+    <p>
+        <a href="includes/logout.php">Logout</a>
+    </p>
+</body>
+</html>

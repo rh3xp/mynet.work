@@ -1,10 +1,11 @@
 <?php
     session_start();
+
     $host = "localhost";
 	$user = "root";
 	$pass = "";
 	$db = "forum";
-	$con = mysqli_connect($host, $user, $pass, $db); 
+	$con = mysqli_connect($host, $user, $pass, $db);
 
     if(isset($_POST['login-btn']))
     {
@@ -15,11 +16,12 @@
   
         $query = "SELECT * FROM users WHERE username='$username' AND passwd='$password'";
   	    $results = mysqli_query($con, $query);
-        if (mysqli_num_rows($results) == 1)
+        if(mysqli_num_rows($results) == 1)
         {
             $_SESSION['username'] = $username;
+            //$_SESSION['ID']=$results['id'];
             $_SESSION['success'] = "You are now logged in";
-            header('location: ../profile.php');
+            header('location: ../post.php');
         }
     }
 ?>
