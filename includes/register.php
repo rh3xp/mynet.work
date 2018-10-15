@@ -28,8 +28,11 @@
     // if (count($errors) == 0)
     if ($password_1 == $password_2)
     {
-        $password = md5($password_1);//encrypt the password before saving in the database
+        //encrypt the password before saving in the database
+        //$password = md5($password_1);
   
+        $password = $password_1;
+
         $query = "INSERT INTO users(username, email, passwd) VALUES('$username', '$email', '$password')";
         mysqli_query($con, $query);
         $_SESSION['username'] = $username;

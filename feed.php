@@ -54,7 +54,7 @@
 	  		<?php
 					$connection = mysql_connect("localhost", "root", "");
 					$db = mysql_select_db("forum", $connection);
-					$sql = "SELECT username, content FROM posts ORDER BY PostedOn DESC";
+					$sql = "SELECT * FROM posts ORDER BY PostedOn DESC";
 					$query = mysql_query($sql, $connection);
 					$num = mysql_num_rows($query);
 					if($num > 0)
@@ -63,12 +63,14 @@
 						{	
 							$uname = $row['username'];
 							$post = $row['content'];
+							$time = $row['PostedOn'];
 							echo '<li>
 									<div class="infos">
 										<img src="http://farm5.staticflickr.com/4136/4817542998_55a7eb8d8b_q.jpg" alt="" title="by tresMunkeys" />
 									</div>
 									<div class="content">
 										<h3>'.$uname.'</h3>
+										<p>'.$time.'</p>
 										<p>'.$post.'</p>
 									</div>		
 									</li>';
@@ -81,28 +83,6 @@
 
 			?>
 
-		<!-- 1
-		<li>
-			<div class="infos">
-				<img src="http://farm5.staticflickr.com/4136/4817542998_55a7eb8d8b_q.jpg" alt="" title="by tresMunkeys" />
-				<a href="https://twitter.com/webodream" class="sprite twitter">@webodream</a>
-				<a href="https://www.facebook.com/groups/115089745169149" class="sprite facebook">depot.webdesigner</a>
-				<a href="https://github.com/arbaoui-mehdi" class="sprite github">@arbaoui-mehdi</a> 
-			</div>
-			<div class="content">
-		
-			 <h3>
-					Person 1
-					<b>ceo &amp; founder "depot webdesigner"</b>
-				</h3>
-				<p>
-					I look ugly. <a href="#">http://www.depotwebdesigner.com</a>.
-				</p>
-			</div> 
-		</li> -->
-
-
-		
 		<!-- 2 
 		<li>
 			<div class="infos">
@@ -121,25 +101,7 @@
 				</p>
 			</div>
 		</li>
-
-		<li>
-			<div class="infos">
-				<img src="http://farm5.staticflickr.com/4136/4817542998_55a7eb8d8b_q.jpg" alt="" title="by tresMunkeys" />
-				<a href="https://twitter.com/webodream" class="sprite twitter">@webodream</a>
-				<a href="https://www.facebook.com/groups/115089745169149" class="sprite facebook">depot.webdesigner</a>
-				<a href="https://github.com/arbaoui-mehdi" class="sprite github">@arbaoui-mehdi</a>
-			</div>
-			<div class="content">
-				<h3>
-					Person 3
-					<b>ceo &amp; founder "depot webdesigner"</b>
-				</h3>
-				<p>
-					I look ugly. <a href="#">http://www.depotwebdesigner.com</a>.
-				</p>
-			</div>
-		</li> -->
-
+	-->
 	</ul>
     <script  src="js/feed.js"></script>
 </body>
