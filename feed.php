@@ -51,8 +51,6 @@
 <body>
 <h1>Hi <?php echo $uname ?></h1>
 	<ul id="messages">
-
-
 	  		<?php
 					$connection = mysql_connect("localhost", "root", "");
 					$db = mysql_select_db("forum", $connection);
@@ -61,7 +59,7 @@
 					$num = mysql_num_rows($query);
 					if($num > 0)
 					{
-						while($row = mysql_fetch_array($query))
+						while($row = mysql_fetch_assoc($query))
 						{	
 							$uname = $row['username'];
 							$post = $row['content'];
@@ -73,13 +71,12 @@
 										<h3>'.$uname.'</h3>
 										<p>'.$post.'</p>
 									</div>		
-								  </li>';
+									</li>';
 						}
 					}
-
 					else
 					{
-						echo "<h1>add some posts.</h1>";
+						echo "<h1>Add some posts.</h1>";
 					}
 
 			?>
