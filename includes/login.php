@@ -1,49 +1,108 @@
 <?php
-    session_start();
+	session_start();
+	if(isset($_SESSION['username']))
+	{
+		$uname = $_SESSION['username'];
+	
+	echo '<a href="includes/logout.php">
+			<input class="logoutbutton" type="button" value="Logout">
+		</a>';
+	}
 
-    $host = "localhost";
-    $user = "root";
-    $pass = "";
-    
-    //Database Selection
-    $link = mysql_connect($host, $user, $pass); 
-    if (!$link) {
-        die('Could not connect: ' . mysql_error());
-    }
-    //Database Selection
-    mysql_select_db('forum') or die(mysql_error());
+	// create connection
 
 
-
-    if(isset($_POST['login-btn']))
-    {
-        // escapes the escape sequences and does not allow users to hack into it.
-        //$username = mysqli_real_escape_string($con, $_POST['username']);
-        //$password_1 = mysqli_real_escape_string($con, $_POST['password_1']);
-        $username = $_POST['username'];
-        $password_1 = $_POST['password_1'];
-  
-
-        //encrypt the password before saving in the database
-        //$password = md5($password_1);
-        $password = $password_1;
-
-        $query = "SELECT * FROM users WHERE username='$username' AND passwd='$password' LIMIT 0,1";
-        $result=mysql_query($query) or die("SELECT * FROM users WHERE username = <font color='red'>".$username."</font>"."AND password = <font color='red'>".$password."</font><br/><br/>".mysql_error());
-        $rows = mysql_fetch_array($result);
-
-        if($rows)
-        {
-            //create_session();
-            $_SESSION['username'] = $username;
-            $_SESSION['success'] = "You are now logged in";
-            header('location: ../post.php');
-
-        }
-        else
-        {
-            echo "<h1>Incorrect username/password.</h1>";
-            echo "SELECT * FROM users WHERE username='<font color='red'>".$username."</font>'"." AND password='<font color='red'>".$password."</font>'";
-        }
-    }
 ?>
+
+
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  <title>feed</title>
+	<link rel="stylesheet" href="css/feed_style.css">
+	<link rel="stylesheet" href="style.css">
+	<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Satisfy" />
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+	<title>newsfeed</title>
+	<style>
+      .logoutbutton
+      {
+        position:absolute;
+        margin-top: 20px;
+        margin-left:400px;
+        top:0;
+        right:0;
+        width: 8%;
+        padding: 10px;
+        outline: none;
+        border: none;
+        border-radius: 25px;
+        text-transform: uppercase;
+        background: #f45c42;
+        color: rgba(255, 255, 255, 0.8);
+        font-weight: 800;
+        cursor: pointer;
+
+      }
+    </style>
+</head>
+
+<body>
+<h1>Hi <?php echo $uname ?></h1>
+	<ul id="messages">
+	  		<?php
+					$connection = mysqli_connect("localhost", "root", "");
+					$db = mysqli_select_db($connection, "forum");
+					$sql = "SELECT * FROM posts ORDER BY PostedOn DESC";
+					$query = mysqli_query($connection, $sql);
+					$num = mysqli_num_rows($query);
+					if($num > 0)
+					{
+						while($row = mysqli_fetch_assoc($query))
+						{	
+							$uname = $row['username'];
+							$post = $row['content'];
+							$time = $row['PostedOn'];
+							echo '<li>
+									<div class="infos">
+										<img src="http://farm5.staticflickr.com/4136/4817542998_55a7eb8d8b_q.jpg" alt="" title="by tresMunkeys" />
+									</div>
+									<div class="content">
+										<h3>'.$uname.'</h3>
+										<p>'.$time.'</p>
+										<p>'.$post.'</p>
+									</div>		
+									</li>';
+						}
+					}
+					else
+					{
+						echo "<h1>Add some posts.</h1>";
+					}
+
+			?>
+
+		<!-- 2 
+		<li>
+			<div class="infos">
+				<img src="http://farm3.staticflickr.com/2721/4531285963_cd28f61b16_q.jpg" alt=""  title="by tresMunkeys" />
+				<a href="https://twitter.com/webodream" class="sprite twitter">@webodream</a>
+				<a href="https://www.facebook.com/groups/115089745169149" class="sprite facebook">depot.webdesigner</a>
+				<a href="https://github.com/arbaoui-mehdi" class="sprite github">@arbaoui-mehdi</a>
+			</div>
+			<div class="content">
+				<h3>
+					Person 2
+					<b>webdeveloper</b>
+				</h3>
+				<p>
+					random post 2 by person 2.
+				</p>
+			</div>
+		</li>
+	-->
+	</ul>
+    <script  src="js/feed.js"></script>
+</body>
+</html>

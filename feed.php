@@ -52,14 +52,14 @@
 <h1>Hi <?php echo $uname ?></h1>
 	<ul id="messages">
 	  		<?php
-					$connection = mysql_connect("localhost", "root", "");
-					$db = mysql_select_db("forum", $connection);
+					$connection = mysqli_connect("localhost", "root", "");
+					$db = mysqli_select_db($connection, "forum");
 					$sql = "SELECT * FROM posts ORDER BY PostedOn DESC";
-					$query = mysql_query($sql, $connection);
-					$num = mysql_num_rows($query);
+					$query = mysqli_query($connection, $sql);
+					$num = mysqli_num_rows($query);
 					if($num > 0)
 					{
-						while($row = mysql_fetch_assoc($query))
+						while($row = mysqli_fetch_assoc($query))
 						{	
 							$uname = $row['username'];
 							$post = $row['content'];
